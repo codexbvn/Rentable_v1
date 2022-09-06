@@ -2,12 +2,14 @@ import React from "react";
 import { useState } from "react";
 import Layout from "../../core/Layout";
 import Error from "../ErrorHandler/Error";
-import "./SignIn.css";
 import { Link } from "react-router-dom";
+import "./Signup.css";
 
-function SignIn() {
+function Signup() {
   //react hooks
   const [userData, setUserData] = useState({
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     isLoading: false,
@@ -26,11 +28,32 @@ function SignIn() {
   };
   return (
     <Layout className={`flex flex-col justify-center items-center p-3`}>
-      <Error alertMessage={"Successfully logged in!"} alertType={"success"} />
+      <Error
+        alertMessage={"Successfully created an account!"}
+        alertType={"success"}
+      />
       <div className="w-96 bg-white shadow-xl rounded-lg mt-4 py-4">
         <h1 className="register-heading px-6">Create an account</h1>
         <br />
         <form className="flex p-3 mx-10 flex-col">
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First Name"
+            value={userData.first_name}
+            onChange={handleChange}
+            className="px-3 py-1 rounded-lg outline-none input-bg placeholder:input-placeHolder"
+          />
+          <br />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last Name"
+            value={userData.last_name}
+            onChange={handleChange}
+            className="px-3 py-1 rounded-lg input-bg outline-none placeholder:input-placeHolder"
+          />
+          <br />
           <input
             type="email"
             name="email"
@@ -53,11 +76,8 @@ function SignIn() {
             className="submit-btn px-3 py-1 rounded-md w-24 cursor-pointer"
             onClick={handleSubmit}
           >
-            Signin
+            Register
           </button>
-          <Link to="/forgotPassword" className="my-2">
-            Forgot Password?
-          </Link>
           <br />
           <div>
             <hr className="hr-line rounded-sm"></hr>
@@ -67,12 +87,12 @@ function SignIn() {
             </span>
           </div>
           <div>
-            <span className="text-md">Don't have an account? &nbsp; </span>
+            <span className="text-md">Already have an account? &nbsp; </span>
             <Link
-              to="/signup"
+              to="/signin"
               className="border border-black px-4 py-1 rounded-3xl hover:bg-violet-900 hover:text-white"
             >
-              Signup
+              Signin
             </Link>
           </div>
         </form>
@@ -82,4 +102,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Signup;
