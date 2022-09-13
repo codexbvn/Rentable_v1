@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup/Signup";
 import SignIn from "./components/SignIn/SignIn";
 import Home from "./core/Home";
-import NavBar from "./core/NavBar";
 import Navbar from "./components/Navbar/Navbar";
 
 function Routess() {
@@ -11,7 +10,7 @@ function Routess() {
     <BrowserRouter>
       {/* <NavBar /> */}
       <Navbar />
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
