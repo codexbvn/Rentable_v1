@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./Layout";
 import { Link } from "react-router-dom";
-import homepageImg from "../images/homepage.svg";
+import homepageImg from "../assets/homepage.svg";
 function Home() {
   return (
     <Layout className={``}>
