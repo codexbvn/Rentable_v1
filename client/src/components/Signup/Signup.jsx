@@ -90,7 +90,7 @@ function Signup() {
             <span className="text-md">Already have an account? &nbsp; </span>
             <Link
               to="/signin"
-              className="border border-black px-4 py-1 rounded-3xl hover:bg-violet-900 hover:text-white"
+              className="border border-black px-4 py-1 rounded-3xl hover:bg-purple-main hover:text-white"
             >
               Signin
             </Link>

@@ -1,40 +1,30 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
-const dbConfig = require("./database/db.config");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
 const app = express();
 
-let corsOptions = {
-  origin: "http://localhost:3000",
-};
+//configured database
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Database connected sucessfully!"))
+  .catch((err) => {
+    console.log(err);
+  });
 
 //middlewares
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-//add configuration to database
-var sql = require("mysql2");
-
-// connect to your database
-sql.connect(dbConfig, function (err) {
-  if (err) console.log(err);
-
-  // create Request object
-  var request = new sql.Request();
-
-  // query to the database and get the records
-  request.query("select * from Student", function (err, recordset) {
-    if (err) console.log(err);
-
-    // send records as a response
-    res.send(recordset);
-  });
-});
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to Rentable Applicaton!",
-  });
-});
+app.use(morgan("dev"));
+app.use(cors({ origin: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //Setup port, listen for requests
 const PORT = process.env.PORT || 8080;

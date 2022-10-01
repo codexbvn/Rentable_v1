@@ -28,7 +28,7 @@ function SignIn() {
     <Layout className={`flex flex-col justify-center items-center p-3`}>
       <Error alertMessage={"Successfully logged in!"} alertType={"success"} />
       <div className="w-96 bg-white shadow-xl rounded-lg mt-4 py-4">
-        <h1 className="register-heading px-6">Create an account</h1>
+        <h1 className="register-heading px-6">Login</h1>
         <br />
         <form className="flex p-3 mx-10 flex-col">
           <input
@@ -70,7 +70,7 @@ function SignIn() {
             <span className="text-md">Don't have an account? &nbsp; </span>
             <Link
               to="/signup"
-              className="border border-black px-4 py-1 rounded-3xl hover:bg-violet-900 hover:text-white"
+              className="border border-black px-4 py-1 rounded-3xl hover:bg-purple-main hover:text-white"
             >
               Signup
             </Link>
