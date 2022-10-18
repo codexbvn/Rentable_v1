@@ -2,7 +2,7 @@ const Post = require("../models/HousePost");
 
 //get post by id
 exports.postById = (req, res, next, id) => {
-  Post.findById({ _id: id }).exec((err, post) => {
+  Post.findById(id).exec((err, post) => {
     if (err || !post) {
       return res.status(400).json({
         error: "Post not found!",
@@ -35,9 +35,9 @@ exports.createPost = (req, res) => {
     });
   }
   let post = new Post(req.body);
-  post.addUserId = req.user._id;
+  post.addUserId(req.user._id);
   post.save((err, result) => {
-    if (err || !re) {
+    if (err || !result) {
       res
         .json({
           error: "Could not add your post!",

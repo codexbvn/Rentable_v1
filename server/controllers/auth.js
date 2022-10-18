@@ -34,35 +34,34 @@ exports.signIn = (req, res) => {
         error: "User with this email doesn't exist, please Sign up!",
       });
     }
+    //if user is found, make sure the email and password match
+
+    //create authenticate method in user model
+    if (!user.authenticate(password)) {
+      return res.status(401).json({
+        error: "Email and password doesn't match!",
+      });
+    }
+
+    //generate a signed token with user id and secret
+    const token = jwtt.sign({ _id: user._id }, "rentable");
+
+    //persist the token as 't' in cookie with expiry date
+    res.cookie("rentable", token, { expire: new Date() + 1000 });
+
+    //return response with user and token to frontend client
+    const { _id, name, e_mail } = user;
+    return res
+      .json({
+        token,
+        user: {
+          _id,
+          e_mail,
+          name,
+        },
+      })
+      .status(200);
   });
-
-  //if user is found, make sure the email and password match
-
-  //create authenticate method in user model
-  if (!user.authenticate(password)) {
-    return res.status(401).json({
-      error: "Email and password doesn't match!",
-    });
-  }
-
-  //generate a signed token with user id and secret
-  const token = jwtt.sign({ _id: user._id }, "rentable");
-
-  //persist the token as 't' in cookie with expiry date
-  res.cookie("rentable", token, { expire: new Date() + 1000 });
-
-  //return response with user and token to frontend client
-  const { _id, name, e_mail } = user;
-  return res
-    .json({
-      token,
-      user: {
-        _id,
-        e_mail,
-        name,
-      },
-    })
-    .status(200);
 };
 
 //sign out

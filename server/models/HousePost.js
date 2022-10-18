@@ -22,7 +22,12 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reviews: [mongoose.Schema.Types.ObjectId],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 postSchema.methods = {

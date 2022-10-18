@@ -9,7 +9,12 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  upVotedBy: [mongoose.Schema.Types.ObjectId],
+  upVotedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   upVoteCount: {
     type: Number,
     default: 0,
@@ -43,7 +48,7 @@ reviewSchema.methods = {
   addRating: function (rating) {
     this.rating = rating;
   },
-  upvoteBy: function (userId) {
+  upVoteBy: function (userId) {
     this.upVotedBy.push(userId);
   },
 };
